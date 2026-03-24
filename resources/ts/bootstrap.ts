@@ -66,7 +66,9 @@ window.countdown        =   countdown;
 window.timespan         =   timespan;
 
 window.Axios.defaults.headers.common['x-requested-with']    =   'XMLHttpRequest';
-window.Axios.defaults.headers.common['X-CSRF-TOKEN']        =   ns.authentication.csrf;
+if ( ! window.location.pathname.startsWith( '/do-setup' ) ) {
+    window.Axios.defaults.headers.common['X-CSRF-TOKEN']    =   ns.authentication.csrf;
+}
 window.Axios.defaults.withCredentials                       =   true;
 
 if ( ns.websocket.enabled ) {
