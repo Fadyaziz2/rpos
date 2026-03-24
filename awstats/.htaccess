@@ -1,0 +1,4 @@
+AuthName "holidayhome-eg.com statistics"
+AuthType Basic
+AuthUserFile /home/holidayhome-eg/.awstats-htpasswd
+require valid-user

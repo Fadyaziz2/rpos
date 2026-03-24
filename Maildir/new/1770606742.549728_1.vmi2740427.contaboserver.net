@@ -1,0 +1,28 @@
+Return-Path: <webmin-noreply@vmi2740427.contaboserver.net>
+X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
+	vmi2740427.contaboserver.net
+X-Spam-Level: 
+X-Spam-Status: No, score=0.0 required=5.0 tests=NO_RELAYS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.6
+X-Original-To: holidayhome-eg@holidayhome-eg.com
+Delivered-To: holidayhome-eg@vmi2740427.contaboserver.net
+Received: by vmi2740427.contaboserver.net (Postfix, from userid 0)
+	id 43E5B60DDEC; Mon,  9 Feb 2026 04:12:22 +0100 (CET)
+DKIM-Filter: OpenDKIM Filter v2.11.0 vmi2740427.contaboserver.net 43E5B60DDEC
+From: webmin-noreply@vmi2740427.contaboserver.net
+To: holidayhome-eg@holidayhome-eg.com
+Subject: SSL certificate renewal complete
+Date: Mon, 09 Feb 2026 04:12:22 +0100 (CET)
+Message-Id: <1770606742.549392.1@vmi2740427.contaboserver.net>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="bound1770606742"
+
+This is a multi-part message in MIME format.
+
+--bound1770606742
+Content-type: text/plain
+
+A new certificate was successfully requested from Let's Encrypt, and installed for holidayhome-eg.com.
+
+--bound1770606742--
+
