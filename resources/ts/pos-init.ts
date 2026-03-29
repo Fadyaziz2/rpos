@@ -1093,6 +1093,10 @@ export class POS {
             ( options.ns_pos_printing_enabled_for === 'only_paid_orders' && [ 'paid' ].includes( order.payment_status ) )
         ) {
             this.print.process( order.id, 'sale', mode );
+
+            if ( order.type?.identifier === 'delivery' ) {
+                this.print.process( order.id, 'sale_kitchen', mode );
+            }
         } else {
             return false;
         }
