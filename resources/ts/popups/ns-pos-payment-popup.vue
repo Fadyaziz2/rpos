@@ -135,7 +135,7 @@ export default {
 
                     nsSnackBar.success( result.message ).subscribe();
 
-                    POS.printOrderReceipt( result.data.order, 'silent' );
+                    POS.printOrderReceipt( result.data.order );
     
                     // close payment popup
                     this.popup.close();
