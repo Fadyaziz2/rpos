@@ -1078,6 +1078,9 @@ export class POS {
 
     printOrderReceipt( order, mode ) {
         const options = this.options.getValue();
+        const orderTypeIdentifier = typeof order.type === 'string'
+            ? order.type
+            : order.type?.identifier;
 
         if (options.ns_pos_printing_enabled_for === 'disabled') {
             return false;
@@ -1094,7 +1097,7 @@ export class POS {
         ) {
             this.print.process( order.id, 'sale', mode );
 
-            if ( order.type?.identifier === 'delivery' ) {
+            if ( orderTypeIdentifier === 'delivery' ) {
                 this.print.process( order.id, 'sale_kitchen', mode );
             }
         } else {
