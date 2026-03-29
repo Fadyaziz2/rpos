@@ -20,6 +20,10 @@ use App\Classes\Hook;
                     {!! nl2br( $ordersService->orderTemplateMapping( 'ns_invoice_receipt_column_b', $order ) ) !!}
                 </div>
             </div>
+            <div class="mt-2 pt-2 border-t border-gray-200 text-sm">
+                <div><strong>{{ __( 'Order Number' ) }}:</strong> {{ $order->code }}</div>
+                <div><strong>{{ __( 'Order Date & Time' ) }}:</strong> {{ optional( $order->created_at )->format( 'Y-m-d H:i:s' ) }}</div>
+            </div>
         </div>
         <div class="table w-full">
             <table class="w-full">

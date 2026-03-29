@@ -19,6 +19,10 @@ $ordersService  =   app()->make( OrdersService::class );
                     {!! nl2br( $ordersService->orderTemplateMapping( 'ns_invoice_receipt_column_b', $refund->order ) ) !!}
                 </div>
             </div>
+            <div class="mt-2 pt-2 border-t border-gray-200 text-sm">
+                <div><strong>{{ __( 'Order Number' ) }}:</strong> {{ $refund->order->code }}</div>
+                <div><strong>{{ __( 'Order Date & Time' ) }}:</strong> {{ optional( $refund->order->created_at )->format( 'Y-m-d H:i:s' ) }}</div>
+            </div>
         </div>
         <div class="table w-full">
             <table class="w-full">
