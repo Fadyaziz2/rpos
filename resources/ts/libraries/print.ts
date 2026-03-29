@@ -8,6 +8,7 @@ export default class Print {
     private printingURL     =   {
         'refund'    :   'refund_printing_url',
         'sale'      :   'sale_printing_url',
+        'sale_kitchen' : 'sale_kitchen_printing_url',
         'payment'   :   'payment_printing_url',
     }
 

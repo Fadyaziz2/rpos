@@ -209,6 +209,7 @@ class OrdersController extends DashboardController
             ] ),
             'urls' => [
                 'sale_printing_url' => Hook::filter( 'ns-pos-printing-url', ns()->url( '/dashboard/orders/receipt/{id}?dash-visibility=disabled&autoprint=true' ) ),
+                'sale_kitchen_printing_url' => Hook::filter( 'ns-pos-kitchen-printing-url', ns()->url( '/dashboard/orders/receipt/{id}?dash-visibility=disabled&autoprint=true&kitchen=true' ) ),
                 'orders_url' => ns()->route( 'ns.dashboard.orders' ),
                 'dashboard_url' => ns()->route( 'ns.dashboard.home' ),
                 'categories_url' => ns()->route( 'ns.dashboard.products.categories.create' ),

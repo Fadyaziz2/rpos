@@ -3,6 +3,20 @@ use App\Models\Order;
 use App\Classes\Hook;
 use Illuminate\Support\Facades\View;
 
+$isKitchenReceipt = request()->boolean( 'kitchen' );
+$isDeliveryOrder = $order->type === 'delivery';
+
+$deliveryPhone = data_get( $order, 'shipping_address.phone' )
+    ?: data_get( $order, 'customer.phone' )
+    ?: data_get( $order, 'customer.mobile' );
+
+$deliveryAddress = collect( [
+    data_get( $order, 'shipping_address.address_1' ),
+    data_get( $order, 'shipping_address.address_2' ),
+    data_get( $order, 'shipping_address.city' ),
+    data_get( $order, 'shipping_address.country' ),
+] )->filter()->implode( ', ' );
+
 ?>
 <div class="w-full h-full">
     <div class="w-full md:w-1/2 lg:w-1/3 shadow-lg bg-white p-2 mx-auto">
@@ -26,7 +40,37 @@ use Illuminate\Support\Facades\View;
                 <div><strong>{{ __( 'Order Number' ) }}:</strong> {{ $order->code }}</div>
                 <div><strong>{{ __( 'Order Date & Time' ) }}:</strong> {{ optional( $order->created_at )->format( 'Y-m-d H:i:s' ) }}</div>
             </div>
+
+            @if ( ! $isKitchenReceipt && $isDeliveryOrder )
+            <div class="mt-2 pt-2 border-t border-gray-200 text-sm">
+                <div><strong>{{ __( 'Customer Name' ) }}:</strong> {{ trim( data_get( $order, 'customer.first_name' ) . ' ' . data_get( $order, 'customer.last_name' ) ) ?: __( 'N/A' ) }}</div>
+                <div><strong>{{ __( 'Mobile' ) }}:</strong> {{ $deliveryPhone ?: __( 'N/A' ) }}</div>
+                <div><strong>{{ __( 'Delivery Address' ) }}:</strong> {{ $deliveryAddress ?: __( 'N/A' ) }}</div>
+            </div>
+            @endif
         </div>
+
+        @if ( $isKitchenReceipt )
+        <div class="table w-full">
+            <table class="w-full">
+                <thead>
+                    <tr class="font-semibold">
+                        <td class="p-2 border-b border-gray-800">{{ __( 'Products (Kitchen Copy)' ) }}</td>
+                    </tr>
+                </thead>
+                <tbody class="text-sm">
+                    @foreach( Hook::filter( 'ns-receipt-products', $order->combinedProducts ) as $product )
+                    <tr>
+                        <td class="p-2 border-b border-gray-700">
+                            <?php $productName  =   View::make( 'pages.dashboard.orders.templates._product-name', compact( 'product' ) );?>
+                            <?php echo Hook::filter( 'ns-receipt-product-name', $productName->render(), $product );?>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        @else
         <div class="table w-full">
             <table class="w-full">
                 <thead>
@@ -157,6 +201,7 @@ use Illuminate\Support\Facades\View;
                 {{ ns()->option->get( 'ns_invoice_receipt_footer' ) }}
             </div>
         </div>
+        @endif
     </div>
 </div>
 @includeWhen( request()->query( 'autoprint' ) === 'true', '/pages/dashboard/orders/templates/_autoprint' )
