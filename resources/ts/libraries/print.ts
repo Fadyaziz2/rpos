@@ -24,7 +24,12 @@ export default class Print {
             item.remove();
         }
 
-        const url               =   this.urls[ this.printingURL[ documentType ] ].replace( '{reference_id}', reference_id );
+        const templateURL       =   this.urls[ this.printingURL[ documentType ] ] || '';
+        const resolvedURL       =   templateURL
+            .replace( '{reference_id}', reference_id )
+            .replace( '{id}', reference_id );
+        const separator         =   resolvedURL.includes( '?' ) ? '&' : '?';
+        const url               =   `${resolvedURL}${separator}_ts=${Date.now()}`;
         const printSection      =   document.createElement( 'iframe' );
 
         printSection.id         =   'printing-section';
