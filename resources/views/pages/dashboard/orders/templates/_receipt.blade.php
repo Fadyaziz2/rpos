@@ -28,17 +28,19 @@ $deliveryAddress = collect( [
             @endif
         </div>
         <div class="p-2 border-b border-gray-700">
-            <div class="flex flex-wrap -mx-2 text-sm">
-                <div class="px-2 w-1/2">
-                    {!! nl2br( $ordersService->orderTemplateMapping( 'ns_invoice_receipt_column_a', $order ) ) !!}
-                </div>
-                <div class="px-2 w-1/2">
-                    {!! nl2br( $ordersService->orderTemplateMapping( 'ns_invoice_receipt_column_b', $order ) ) !!}
-                </div>
-            </div>
-            <div class="mt-2 pt-2 border-t border-gray-200 text-sm">
+            <div class="text-sm text-center">
                 <div><strong>{{ __( 'Order Number' ) }}:</strong> {{ $order->code }}</div>
                 <div><strong>{{ __( 'Order Date & Time' ) }}:</strong> {{ optional( $order->created_at )->format( 'Y-m-d H:i:s' ) }}</div>
+            </div>
+            <div class="mt-2 pt-2 border-t border-gray-200">
+                <div class="flex flex-wrap -mx-2 text-sm">
+                    <div class="px-2 w-1/2">
+                        {!! nl2br( $ordersService->orderTemplateMapping( 'ns_invoice_receipt_column_a', $order ) ) !!}
+                    </div>
+                    <div class="px-2 w-1/2">
+                        {!! nl2br( $ordersService->orderTemplateMapping( 'ns_invoice_receipt_column_b', $order ) ) !!}
+                    </div>
+                </div>
             </div>
 
             @if ( ! $isKitchenReceipt && $isDeliveryOrder )
